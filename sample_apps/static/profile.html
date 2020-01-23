@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>FishCrypt Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+                $("td").on("click",function() {
+                    Swal.fire(
+                        {   title: "Message:",
+                            text:this.innerText
+                        })
+                });
+            });
+                 </script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+
+        .table td.text {
+            max-width: 10px;
+        }
+        .table td.text span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        body {
+        background: #F1F3FA;
+        }
+
+        /* Profile container */
+        .profile {
+        margin: 20px 0;
+        }
+
+        /* Profile sidebar */
+        .profile-sidebar {
+        padding: 20px 0 10px 0;
+        background: #fff;
+        }
+
+        .profile-userpic img {
+        float: none;
+        margin: 0 auto;
+        width: 50%;
+        height: 50%;
+        -webkit-border-radius: 50% !important;
+        -moz-border-radius: 50% !important;
+        border-radius: 50% !important;
+        }
+
+        .profile-usertitle {
+        text-align: center;
+        margin-top: 20px;
+        }
+
+        .profile-usertitle-name {
+        color: #5a7391;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 7px;
+        }
+
+        .profile-usertitle-job {
+        text-transform: uppercase;
+        color: #5b9bd1;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        }
+
+        .profile-userbuttons {
+        text-align: center;
+        margin-top: 10px;
+        }
+
+        .profile-userbuttons .btn {
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 6px 15px;
+        margin-right: 5px;
+        }
+
+        .profile-userbuttons .btn:last-child {
+        margin-right: 0px;
+        }
+            
+        .profile-usermenu {
+        margin-top: 30px;
+        }
+
+        .profile-usermenu ul li {
+        border-bottom: 1px solid #f0f4f7;
+        }
+
+        .profile-usermenu ul li:last-child {
+        border-bottom: none;
+        }
+
+        .profile-usermenu ul li a {
+        color: #93a3b5;
+        font-size: 14px;
+        font-weight: 400;
+        }
+
+        .profile-usermenu ul li a i {
+        margin-right: 8px;
+        font-size: 14px;
+        }
+
+        .profile-usermenu ul li a:hover {
+        background-color: #fafcfd;
+        color: #5b9bd1;
+        }
+
+        .profile-usermenu ul li.active {
+        border-bottom: none;
+        }
+
+        .profile-usermenu ul li.active a {
+        color: #5b9bd1;
+        background-color: #f6f9fb;
+        border-left: 2px solid #5b9bd1;
+        margin-left: -2px;
+        }
+
+        /* Profile Content */
+        .profile-content {
+        padding: 20px;
+        background: #fff;
+        min-height: 460px;
+        }    
+    </style>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <!--
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+-->
+
+<div class="container">
+    <div class="row profile">
+		<div class="col-md-3">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR USERPIC -->
+				<div class="profile-userpic">
+					<img src="/static/user.png" class="img-responsive" alt="">
+				</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						Username: {{.UserInfo.Username}}
+					</div>
+					<div class="profile-usertitle-job">
+                       
+					</div>
+				</div>
+				<!-- END SIDEBAR USER TITLE -->
+				<!-- SIDEBAR BUTTONS -->
+				<div class="profile-userbuttons">
+					<button type="button" class="btn btn-success btn-sm" onclick="userInfoDialog()">User Info</button>
+					<button type="button" class="btn btn-danger btn-sm" onclick="logout('sessionid')">Logout</button>
+				</div>
+				<!-- END SIDEBAR BUTTONS -->
+				<!-- SIDEBAR MENU -->
+				<div class="profile-usermenu">
+					<ul class="nav">
+
+	                        
+                        <li >
+							<a href="#" class="active">
+							<i class="glyphicon glyphicon-home"></i>
+							My Messages </a>
+                        </li>
+                        
+                        <li >
+                            <a href="/message" target="_blank">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            Send Message </a>
+                        </li>
+				
+						<li>
+							<a href="https://github.com/glennzw/fishcrypt">
+							<i class="glyphicon glyphicon-flag"></i>
+							Help </a>
+						</li>
+					</ul>
+				</div>
+				<!-- END MENU -->
+			</div>
+		</div>
+		<div class="col-md-9">
+            <div class="profile-content" id ="profile-content">
+                              
+
+               <table class="table">
+                <thead>
+                  <tr>
+                    <th>Encrypted Messages</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {{range .UserData}}
+                        <tr><td class="text"><span>{{.EncData}}</span></td></tr>
+                    {{end}}
+                  
+                </tbody>
+              </table>
+
+              <a class="btn btn-success btn-sm" href="/profile/dec">Decrypt Data</a>
+              <a class="btn btn-warning btn-sm" href="/profile/enc">Revert Data</a>
+              
+
+            </div>
+		</div>
+	</div>
+</div>
+<center>
+<strong>Powered by <a href="https://github.com/glennzw/fishcrypt" target="_blank">FishCrypt</a></strong>
+</center>
+<br>
+<br>	
+
+        <script type="text/javascript">
+
+            var htmlInfo = `
+            <table class="table">
+                 <tbody>
+                    
+                    <tr>
+                        <td class="text">
+                            Username:
+                        </td>
+                        <td class="text">
+                            {{.UserInfo.Username}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text">
+                            Public Key:
+                        </td>
+                        <td class="text">
+                            {{.UserInfo.PubKey}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text">
+                            Private Key (Encrypted):
+                        </td>
+                        <td class="text">
+                            {{.UserInfo.EncPrivKey}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text">
+                            Hashed Password:
+                        </td>
+                        <td class="text">
+                            {{.UserInfo.Hash}}
+                        </td>
+                    </tr>
+                    
+                  
+                </tbody>
+              </table>
+            `;
+
+
+
+            function userInfoDialog() {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'User Info from Database',
+                    html: htmlInfo,
+                    showCancelButton: true,
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Close',
+                    confirmButtonText: 'Change Password',
+                    width: 600,
+                    }).then((result) => {
+                        if (result.value) {
+                            // Change password dialog
+                            Swal.fire({
+                            title: 'Change your password',
+                            html:
+                                    '<input id="oldpassword" type="password" class="swal2-input" placeholder="Old password">' +
+                                    '<input id="newpassword" type="password" class="swal2-input" placeholder="New password">',
+
+                            showCancelButton: true,
+                            confirmButtonText: 'Change',
+                            showLoaderOnConfirm: true,
+                            preConfirm: (login) => {
+                                oldpassword = document.getElementById('oldpassword').value
+                                newpassword = document.getElementById('newpassword').value
+                                data = {"oldpassword": oldpassword, "newpassword": newpassword}
+                                return fetch(`/changepassword`, {
+                                    method: 'POST',
+                                    body: JSON.stringify(data)
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                    throw new Error(response.statusText)
+                                    }
+                                    return response.json()
+                                })
+                                .catch(error => {
+                                    Swal.showValidationMessage(
+                                    `Request failed: ${error}`
+                                    )
+                                })
+                            },
+                            allowOutsideClick: () => !Swal.isLoading()
+                            }).then((result) => {
+                            if (result.value) {
+
+                                if (result.value.status == "error") {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: `${result.value.message}`
+                                    })
+                                } else if (result.value.status == "success") {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: `${result.value.message}`
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: `Unknown outcome`
+                                    })
+                                }
+                            
+                            }
+                            })
+
+                        }})
+            }
+
+            function logout() {
+                fetch("/logout") // Nuke session cookie on the remote side
+                .then(function() {
+                    // Nuke browser session key and private key
+                    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                    window.location.replace("/") //Back to main page
+                })
+            }
+
+		</script>
+</body>
+</html>

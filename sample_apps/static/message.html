@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <title>FishCrypt - Submit Message</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+    body {padding-top:20px;}    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+	<div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="/message" method="post">
+          <fieldset>
+            <legend class="text-center">Submit Anonymous Encrypted Message</legend>
+
+            <!-- Message body -->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="message">Message</label>
+              <div class="col-md-9">
+                <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+              </div>
+            </div>
+    
+            <!-- Select User-->
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="message">User</label>
+                <div class="col-md-3">
+                    <select class="form-control" id="username">
+                        {{range .UserInfo}}
+                            <option>{{.Username}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+           
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-primary btn-lg" onclick="sendMessage()">Send</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+	</div>
+</div>	
+<script type="text/javascript">
+
+    function sendMessage(){
+        text = document.getElementById('message').value
+        username = document.getElementById('username').value
+
+        async function dispatch(url = '', data = {}) {
+            const response = await fetch(url, {
+                method: 'POST', 
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data)
+            });
+            return await response.json(); 
+            }
+
+            dispatch('/message', { text: text, username: username })
+            .then((data) => {
+                //console.log(data); // JSON data parsed by `response.json()` call
+                if (data.status !== "success") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: data.message
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: "Message encrypted and sent to user."
+                    })
+                    document.getElementById('message').value = ""
+
+                }
+                
+            });
+    }
+</script>
+</body>
+</html>
